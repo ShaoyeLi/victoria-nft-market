@@ -1,0 +1,10 @@
+{
+  "name": "Victoria Demo NFT",
+  "description": "A demo NFT used in the Victoria cHKD marketplace presentation.",
+  "image": "http://localhost:3000/metadata/images/IMG_4462.jpg",
+  "attributes": [
+    { "trait_type": "Project", "value": "Victoria NFT Market" },
+    { "trait_type": "Network", "value": "Hardhat Localhost" },
+    { "trait_type": "Currency", "value": "cHKD" }
+  ]
+}
