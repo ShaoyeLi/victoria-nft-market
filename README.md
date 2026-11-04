@@ -192,7 +192,21 @@ Views:
 
 ---
 
-## 5. Running locally
+## 5. Verification
+
+The Hardhat suite covers the token, NFT, fixed-price market, and auction contracts. It checks successful flows and important rejection paths such as invalid listings, authorization failures, bid replacement, cancellation rules, and settlement state changes.
+
+```bash
+cd NFT-Market-master
+npm ci
+npm test
+```
+
+GitHub Actions runs the same command for contract changes and pull requests. Sepolia credentials are optional for local tests and must be supplied through `.env`; no RPC key or private key is committed.
+
+---
+
+## 6. Running locally
 
 ```bash
 # Contracts
@@ -211,7 +225,7 @@ Open the Vite dev URL (usually `http://localhost:3000`), connect MetaMask to the
 
 ---
 
-## 6. Sepolia deployment (current example)
+## 7. Sepolia deployment (current example)
 
 > If you re‑deploy, update this section and `frontend-lumina-nft-market/constants.ts`.
 
@@ -228,7 +242,7 @@ Open the Vite dev URL (usually `http://localhost:3000`), connect MetaMask to the
 
 ---
 
-## 7. Known limitations / TODOs
+## 8. Known limitations / TODOs
 
 - NFT metadata storage is **not yet production‑ready**:
   - The demo uses local static files under `public/metadata/`, and the default mint URI is still tied to a demo JSON;  
