@@ -46,9 +46,13 @@ describe("Market", function () {
     expect(order.price).to.equal(price);
     expect(await market.isListed(tokenId)).to.equal(true);
 
-    // 非 owner 不能上架
+    // Use a separate, unlisted NFT so this assertion reaches the ownership
+    // check instead of the "already listed" guard for tokenId 0.
+    await (await nft.safeMint(seller.address, "ipfs://asset-2")).wait();
+    const unlistedTokenId = 1n;
+
     await expect(
-      market.connect(buyer).list(tokenId, price)
+      market.connect(buyer).list(unlistedTokenId, price)
     ).to.be.revertedWith("Market: Sender is not the owner");
   });
 
