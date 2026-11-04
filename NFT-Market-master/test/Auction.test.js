@@ -40,9 +40,15 @@ describe("Auction", function () {
       auction.connect(seller).startAuction(tokenId, startPrice, duration)
     ).to.emit(auction, "AuctionStarted");
 
-    // non-owner cannot start auction
+    // Use a separate, unlisted NFT so this assertion reaches the ownership check
+    // instead of the "already in auction" guard for tokenId 0.
+    await (await nft.safeMint(seller.address, "ipfs://watch-2")).wait();
+    const unlistedTokenId = 1n;
+
     await expect(
-      auction.connect(bidder1).startAuction(tokenId, startPrice, duration)
+      auction
+        .connect(bidder1)
+        .startAuction(unlistedTokenId, startPrice, duration)
     ).to.be.revertedWith("Auction: caller is not NFT owner");
   });
 
